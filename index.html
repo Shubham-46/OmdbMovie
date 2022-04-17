@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details Fetcher</title>
+</head>
+<style>
+    body{
+        font-size: 30px;
+        text-align: center;
+    }
+    table{
+        margin: auto;
+    }
+    td{
+        padding: 15px;
+    }
+    
+    .t2{
+        margin-bottom: 30px;
+        border: 1px solid grey;
+        width: 50%;
+        height: auto;
+        margin: auto;
+        border-radius: 10px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        background-color:  #34568B;
+    }
+    #title{
+        margin-bottom: 30px;
+    }
+    h1{
+        font-family: sans-serif;
+    }
+    #t3{
+        margin-left: -10px;
+    }
+    .img1{
+        height: 300px;
+        width: 80%;
+    }
+    h2{
+        font-family: sans-serif;
+    }
+    #main{
+        width: 60%;
+        height: auto;
+        margin: auto;
+        border: 1px solid black;
+        background-color: rgb(231, 229, 229);
+    }
+    p{
+        font-family: sans-serif;
+        color: white;
+    }
+</style>
+<body>
+    <div id="main">
+    <h1>MOVIEWORLD</h1>
+    <input type="text" id="title" placeholder="Enter movie title" />
+    <button onclick="putMovieData()" >SUBMIT</button>
+    <div id= "container"></div>
+</div>
+</body>
+</html>
+<script>
+   async function putMovieData(){
+       var movie = document.getElementById("title").value;
+
+        let res = await fetch(
+            `http://www.omdbapi.com/?t=${movie}&apikey=b46d33c6`
+        )
+        let data = await res.json();
+        
+        var div = document.getElementById("container")
+        div.setAttribute("class","t2")
+        div.innerHTML = null;
+
+        var title = document.createElement("h2")
+        title.innerHTML = data.Title;
+
+        var poster=document.createElement("img")
+        poster.setAttribute("class","img1")
+        poster.src=data.Poster
+
+        var year = document.createElement("p")
+        year.innerText = `Year - ${data.Year}`;
+
+        var genre = document.createElement("p")
+        genre.innerText = "Genres - " + data.Genre;
+
+        var country=document.createElement("p")
+        country.innerText="Country - " + data.Country;
+
+        var rati = document.createElement("p")
+        rati.innerText = "Ratings - "+ data.imdbRating;
+
+        var language = document.createElement("p")
+        language.innerText = "Language - "+ data.Language;
+
+        div.append(title ,poster, year,language, genre ,country,rati);
+        
+    }
+    
+    
+</script>
