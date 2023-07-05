@@ -1,4 +1,4 @@
-# OmdbMovie
+## OmdbMovie
 I have created a movie search website using omdb api 
 
 Here I will enter any movie name and on clicking 
